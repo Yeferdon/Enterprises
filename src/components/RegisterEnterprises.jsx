@@ -1,6 +1,17 @@
-import React from "react";
+import axios from "axios";
+import React, {useState} from "react";
 
 const RegistreEnterprises = () => {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+
+  const dataSend = {name: name, description: description};
+  const createNewEnterprise = () => {
+    axios.post("http://localhost:3001/enterprises", dataSend);
+    alert("Sufesully Register");
+    window.location.reload(true);
+  };
+
   return (
     <>
       <button
@@ -37,7 +48,7 @@ const RegistreEnterprises = () => {
             <div className="modal-body">
               <form>
                 <div className="mb-3">
-                  <label for="exampleInputEmail1" className="form-label">
+                  <label htmlFor="exampleInputEmail1" className="form-label">
                     Name
                   </label>
                   <input
@@ -45,19 +56,27 @@ const RegistreEnterprises = () => {
                     className="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
+                    value={name}
+                    onChange={(event) => {
+                      setName(event.currentTarget.value);
+                    }}
                   />
                   <div id="emailHelp" className="form-text">
                     Place current company name
                   </div>
                 </div>
                 <div className="mb-3">
-                  <label for="exampleInputPassword1" className="form-label">
+                  <label htmlFor="exampleInputPassword1" className="form-label">
                     Description
                   </label>
                   <input
-                    type="password"
+                    type="text"
                     className="form-control"
                     id="exampleInputPassword1"
+                    value={description}
+                    onChange={(event) => {
+                      setDescription(event.currentTarget.value);
+                    }}
                   />
                 </div>
                 <div className="mb-3 form-check">
@@ -83,7 +102,11 @@ const RegistreEnterprises = () => {
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={createNewEnterprise}
+              >
                 Submit
               </button>
             </div>
