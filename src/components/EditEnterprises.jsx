@@ -2,8 +2,8 @@ import axios from "axios";
 import React, {useState} from "react";
 
 const RegistreEnterprises = ({id, namePrised, descriptionPrised}) => {
-  const [name, setName] = useState(namePrised);
-  const [description, setDescription] = useState(descriptionPrised);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const dataSend = {name: name, description: description};
   const editEnterprise = (id) => {
     axios.put(`http://localhost:3001/enterprises/${id}`, dataSend);
@@ -44,6 +44,7 @@ const RegistreEnterprises = ({id, namePrised, descriptionPrised}) => {
                     class="form-control"
                     id="recipient-name"
                     value={name}
+                    defaultValue={namePrised}
                     onChange={(event) => {
                       setName(event.currentTarget.value);
                     }}
@@ -57,6 +58,7 @@ const RegistreEnterprises = ({id, namePrised, descriptionPrised}) => {
                     class="form-control"
                     id="message-text"
                     value={description}
+                    defaultValue={descriptionPrised}
                     onChange={(event) => {
                       setDescription(event.currentTarget.value);
                     }}
